@@ -24,9 +24,20 @@
         	</ul>
         	Completed in <span class="timer">25</span> seconds
         </section>
-        <input type="button" value="Replay" class='replay'>
-        <input type="button" value="Fed-up" onclick="self.close();">
+
+        <input type="button" value="Replay" onclick='replay()'>
+        <input type="button" value="Fed-up" onclick="quit();">
     </div>
-    <script src="js/app.js"></script>
+    <script>
+      function replay() {
+        opener.document.all.text1.value = 1;
+        window.close();
+      }
+      function quit() {
+        opener.document.all.text1.value = 0;
+        window.close();
+      }
+    </script>
+
 </body>
 </html>

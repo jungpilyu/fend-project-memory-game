@@ -44,13 +44,16 @@ function shuffle(array) {
 
 let nMoves = 0;
 let nOpen = 0;
+let starHtml = '';
 let openedCard;
 let deck;
 let moves;
 let star;
+let finalStars;
 let timer;
 let elapsedTime;
 let elapsedTimeId;
+let endDialog;
 
 function initDeck() {
   let shuffledList = list;// shuffle(list);
@@ -74,16 +77,17 @@ function updateTimer(e) {
 function updateScorePanel() {
   moves.innerText = nMoves;
   const nStars = nMoves <= 5 ? 3 : (nMoves <= 10 ? 2 : 1);
-  let starHtml = '';
+  starHtml = '';
   for(let i = 0; i < nStars; i++) {
     starHtml += '<li><i class="fas fa-2x fa-star"></i></li>';
   }
-  stars.innerHTML = starHtml;// + ' Moves';
+  stars.innerHTML = starHtml;
 }
 
 function init() {
   moves = document.querySelector('.moves');
   stars = document.querySelector('.stars');
+  finalStars = document.querySelector('.finalstars');
   nMoves = 0;
   updateScorePanel();
   nOpen = 0;
@@ -92,6 +96,7 @@ function init() {
   timer = document.querySelector('.timer');
   elapsedTime = 0;
   elapsedTimeId = setInterval(updateTimer, 1000);
+  endDialog = document.querySelector('.endDialog');
 }
 
 function callBackDeck(e) {
@@ -144,9 +149,13 @@ function callBackDeck(e) {
       }
     }
     if(i == deck.children.length) {
-      console.log('Congratulation!');
-      window.open('result.html', 'Completed', 'width=400, height=600, left=50'+
-              ', top=10, scrollbars=no, toolbars=no, location=no, status=no');
+      setTimeout(function () {
+        console.log('Congratulation!');
+        finalStars.innerHTML = starHtml;
+        const finalTimer = document.querySelector('.finaltimer');
+        finalTimer.innerText = elapsedTime;
+        endDialog.showModal();
+      }, 0);
       clearInterval(elapsedTimeId);
     } else {
       console.log('Game continue!');
@@ -161,6 +170,12 @@ document.querySelector('.deck').addEventListener('click', callBackDeck);
 document.querySelector('.restart').addEventListener('click', function(e) {
   init();
 });
-
+document.querySelector('.replay').addEventListener('click', function(e) {
+  init();
+  endDialog.close();
+});
+document.querySelector('.quit').addEventListener('click', function(e) {
+  endDialog.close();
+});
 
 init();
