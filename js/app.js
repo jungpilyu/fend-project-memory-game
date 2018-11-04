@@ -76,7 +76,7 @@ function updateTimer(e) {
 
 function updateScorePanel() {
   moves.innerText = nMoves;
-  const nStars = nMoves <= 5 ? 3 : (nMoves <= 10 ? 2 : 1);
+  const nStars = nMoves <= 25 ? 3 : (nMoves <= 45 ? 2 : 1);
   starHtml = '';
   for(let i = 0; i < nStars; i++) {
     starHtml += '<li><i class="fas fa-2x fa-star"></i></li>';
