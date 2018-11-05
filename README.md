@@ -2,19 +2,20 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Overview](#Overview)
+* [Rubric Points](#Rubric Points)
 
-## Instructions
+# Overview
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This write-up was written as a partial fulfillment of the requirements for the Nano degree of "Front-end engineer" at the Udacity. The project implement the classic finding-pair-cards game which requires the rules:
 
-To get started, open `js/app.js` and start building out the app's functionality
+- Cards should be shuffled on load or replay.
+- Game should display the current number of moves a user has made.
+- The game should show a star rating from one upto three based on the number of moves a user made.
+- When a game starts, a timer should start and be displayed.
+- When the player wins the game, a congratulations modal shoud open showing the moves, star rating, and the time elapsed.
+- A replay button should shuffle the board, reset the timer, and initialize the star rating.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+# Rubric Points
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+This write-up explains the points in rubric by providing the description in each step and links to other supporting documents and the images to demonstrate how the code works.
