@@ -18,7 +18,7 @@ body {
 
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container {
@@ -30,8 +30,8 @@ body {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    font-size: 55px;
+    font-weight: bold;
+    font-size: 35px;
 }
 
 /*
@@ -39,10 +39,10 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    width: 330px;
+    min-height: 330px;
+    background: linear-gradient(160deg, #88c70f 0%, #ecf342 100%);
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -53,8 +53,8 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 65px;
+    width: 65px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -87,10 +87,12 @@ h1 {
  */
 
  .score-panel {
-     text-align: left;
-     width: 700px;
+     width: 300px;
      margin-bottom: 40px;
-     font-size: 30px;
+     font-size: 16px;
+     display: flex;
+     flex-flow: row nowrap;
+     justify-content: space-between;
  }
 
 .score-panel .stars {
@@ -118,19 +120,18 @@ h1 {
 .endDialog {
  text-align: center;
  flex-flow: column nowrap;
- font-size: 35px;
+ font-size: 19px;
 }
 
 .scoredisplay .finalstars {
    margin: 0;
    padding: 0;
-   display: inline-block;
+   display: inline-flex;
    margin: 0 5px 0 0;
 }
 
 .scoredisplay .finalstars li {
    list-style: none;
-   display: inline-block;
    color: orange;
 }
 
@@ -140,11 +141,11 @@ h1 {
 }
 
 .replay {
-    font-size: 40px;
+    font-size: 20px;
     text-align: center;
 }
 .quit {
-    font-size: 40px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -152,13 +153,30 @@ h1 {
  * Styles for responsiveness
  */
 
-/* @media screen and (min-width: 700px) { */
+@media screen and (min-width: 700px) {
   .score-panel {
-    width: 345px;
-    margin-bottom: 10px;
-    font-size: 15px;
+    width: 500px;
+    margin-bottom: 40px;
+    font-size: 25px;
   }
 
+  .deck {
+      width: 650px;
+      min-height: 650px;
+      padding: 35px;
+  }
+
+  .deck .card {
+      height: 125px;
+      width: 125px;
+  }
+
+  .deck .card.match {
+    font-size: 70px;
+  }
+    .deck .card.show {
+      font-size: 70px;
+    }
 
   h1 {
     font-size: 45px;
@@ -167,4 +185,4 @@ h1 {
   .endDialog {
     font-size: 25px;
   }
-/* } */
+}

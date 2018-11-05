@@ -2,12 +2,12 @@
  * Create a list that holds all of your cards
  */
 let list = ["address-book","address-card", "building", "calendar",
-"calendar-alt", "chart-bar", "copyright", "edit",
+"calendar-alt", "chart-bar", "keyboard", "edit",
 "address-book","address-card", "building", "calendar",
-"calendar-alt", "chart-bar", "copyright", "edit"];
+"calendar-alt", "chart-bar", "keyboard", "edit"];
 
 //"envelope","envelope-open","file","file-alt",
-//"save", "sticky-note", "hdd", "keyboard"];
+//"save", "sticky-note", "hdd", "copyright"];
 
 /*
  * Display the cards on the page
@@ -56,12 +56,12 @@ let elapsedTimeId;
 let endDialog;
 
 function initDeck() {
-  let shuffledList = list;// shuffle(list);
+  let shuffledList = shuffle(list);
   let spin = '';//"fa-spin"
   let updatedHtml = '';
   for(let i = 0; i < shuffledList.length; i++) {
     updatedHtml +=`<li class='${shuffledList[i]} card'>
-  <i class='fas ${spin} fa-2x fa-${shuffledList[i]}''></i>
+  <i class='fas ${spin} fa-1x fa-${shuffledList[i]}''></i>
 </li>
 `;
   }
@@ -79,7 +79,7 @@ function updateScorePanel() {
   const nStars = nMoves <= 25 ? 3 : (nMoves <= 45 ? 2 : 1);
   starHtml = '';
   for(let i = 0; i < nStars; i++) {
-    starHtml += '<li><i class="fas fa-2x fa-star"></i></li>';
+    starHtml += '<li><i class="fas fa-1x fa-star"></i></li>';
   }
   stars.innerHTML = starHtml;
 }
@@ -148,16 +148,17 @@ function callBackDeck(e) {
         break;
       }
     }
-    if(i == deck.children.length) {
+    if(i == deck.children.length) { // You win!
       setTimeout(function () {
         console.log('Congratulation!');
         finalStars.innerHTML = starHtml;
         const finalTimer = document.querySelector('.finaltimer');
         finalTimer.innerText = elapsedTime;
+        // Pop-up dialog
         endDialog.showModal();
       }, 0);
       clearInterval(elapsedTimeId);
-    } else {
+    } else { // You do not win yet
       console.log('Game continue!');
     }
     nOpen = 0;
