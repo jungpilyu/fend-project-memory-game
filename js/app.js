@@ -16,7 +16,11 @@ let list = ["address-book","address-card", "building", "calendar",
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/**
+* @description Shuffle function from http://stackoverflow.com/a/2450976
+* @param {array} array
+* @returns {array} shuffled array
+*/
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -55,6 +59,9 @@ let elapsedTime;
 let elapsedTimeId;
 let endDialog;
 
+/**
+* @description initialize the card deck
+*/
 function initDeck() {
   let shuffledList = shuffle(list);
   let spin = '';//"fa-spin"
@@ -69,11 +76,17 @@ function initDeck() {
   deck.innerHTML = updatedHtml;
 }
 
+/**
+* @description Update timer
+*/
 function updateTimer(e) {
   elapsedTime++;
   timer.innerText = elapsedTime;
 }
 
+/**
+* @description Update the number of moves and star rating
+*/
 function updateScorePanel() {
   moves.innerText = nMoves;
   const nStars = nMoves <= 25 ? 3 : (nMoves <= 45 ? 2 : 1);
@@ -84,6 +97,9 @@ function updateScorePanel() {
   stars.innerHTML = starHtml;
 }
 
+/**
+* @description Initialize global variables, timer, moves, and star rating
+*/
 function init() {
   moves = document.querySelector('.moves');
   stars = document.querySelector('.stars');
@@ -99,6 +115,9 @@ function init() {
   endDialog = document.querySelector('.endDialog');
 }
 
+/**
+* @description Implement the most of game logic
+*/
 function callBackDeck(e) {
   let card = e.target.classList;
   // check if a user click a valid card
@@ -179,4 +198,5 @@ document.querySelector('.quit').addEventListener('click', function(e) {
   endDialog.close();
 });
 
+// ignite the exciting memory game!
 init();
