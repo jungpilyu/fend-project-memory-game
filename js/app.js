@@ -1,10 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
-let list = ["address-book","address-card", "building", "calendar",
-"calendar-alt", "chart-bar", "keyboard", "edit",
-"address-book","address-card", "building", "calendar",
-"calendar-alt", "chart-bar", "keyboard", "edit"];
+const half_list = ["address-book","address-card", "building", "calendar",
+"calendar-alt", "chart-bar", "keyboard", "edit"]
+let list = half_list.concat(half_list);
 
 //"envelope","envelope-open","file","file-alt",
 //"save", "sticky-note", "hdd", "copyright"];
@@ -63,8 +62,8 @@ let endDialog;
 * @description initialize the card deck
 */
 function initDeck() {
-  let shuffledList = shuffle(list);
-  let spin = '';//"fa-spin"
+  const shuffledList = list;//shuffle(list);
+  const spin = '';//"fa-spin"
   let updatedHtml = '';
   for(let i = 0; i < shuffledList.length; i++) {
     updatedHtml +=`<li class='${shuffledList[i]} card'>
@@ -111,8 +110,11 @@ function init() {
   initDeck();
   timer = document.querySelector('.timer');
   elapsedTime = 0;
-  elapsedTimeId = setInterval(updateTimer, 1000);
+  if(!elapsedTimeId) {
+    elapsedTimeId = setInterval(updateTimer, 1000);
+  }
   endDialog = document.querySelector('.endDialog');
+  openedCard = none;
 }
 
 /**
