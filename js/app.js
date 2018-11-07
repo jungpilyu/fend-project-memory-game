@@ -61,8 +61,8 @@ let endDialog;
 /**
 * @description initialize the card deck
 */
-function initDeck() {
-  const shuffledList = list;//shuffle(list);
+const initDeck = () => {
+  const shuffledList = shuffle(list);
   const spin = '';//"fa-spin"
   let updatedHtml = '';
   for(let i = 0; i < shuffledList.length; i++) {
@@ -71,14 +71,13 @@ function initDeck() {
 </li>
 `;
   }
-  console.log(updatedHtml);
   deck.innerHTML = updatedHtml;
 }
 
 /**
 * @description Update timer
 */
-function updateTimer(e) {
+const updateTimer = (e) => {
   elapsedTime++;
   timer.innerText = elapsedTime;
 }
@@ -86,7 +85,7 @@ function updateTimer(e) {
 /**
 * @description Update the number of moves and star rating
 */
-function updateScorePanel() {
+const updateScorePanel = () => {
   moves.innerText = nMoves;
   const nStars = nMoves <= 25 ? 3 : (nMoves <= 45 ? 2 : 1);
   starHtml = '';
@@ -94,38 +93,43 @@ function updateScorePanel() {
     starHtml += '<li><i class="fas fa-1x fa-star"></i></li>';
   }
   stars.innerHTML = starHtml;
+  timer.innerText = elapsedTime;
 }
 
 /**
-* @description Initialize global variables, timer, moves, and star rating
+* @description Initialize global, timer, moves, and star rating
 */
-function init() {
+const init = () => {
   moves = document.querySelector('.moves');
   stars = document.querySelector('.stars');
   finalStars = document.querySelector('.finalstars');
+  timer = document.querySelector('.timer');
+  elapsedTime = 0;
+  elapsedTimeId = setInterval(updateTimer, 1000);
   nMoves = 0;
   updateScorePanel();
   nOpen = 0;
   deck = document.querySelector('.deck');
   initDeck();
-  timer = document.querySelector('.timer');
-  elapsedTime = 0;
-  if(!elapsedTimeId) {
-    elapsedTimeId = setInterval(updateTimer, 1000);
-  }
+
   endDialog = document.querySelector('.endDialog');
-  openedCard = none;
 }
 
 /**
 * @description Implement the most of game logic
 */
-function callBackDeck(e) {
-  let card = e.target.classList;
+const callBackDeck = (e) => {
+  const card = e.target.classList;
   // check if a user click a valid card
   if(e.target.nodeName != 'LI' || card[card.length-1] == 'match') {
     return;
   }
+  // check if two cards are the same
+  if(nOpen == 1 && openedCard === e.target.classList) {
+    //console.log('Now bug fixed\n')
+    return;
+  }
+
   // user clicked a valid card
   // then open the card
   nOpen++;
@@ -142,11 +146,10 @@ function callBackDeck(e) {
     return;
   }
 
-  // Now, this is the second card. So check if two cards match
-  console.log(openedCard[0]+' vs '+ e.target.classList[0])
+  // Now, there are two distinctive cards. So check if two cards match
   if(openedCard[0] != e.target.classList[0]) {
     // Cards do not match. So cards close in 1 second and return
-    setTimeout(function (cardA, cardB) {
+    setTimeout( (cardA, cardB) => {
       cardA.remove('show');
       cardA.remove('open');
       cardB.remove('show');
@@ -156,47 +159,41 @@ function callBackDeck(e) {
     return;
   }
   // Cards match. So tag cards as 'match' and check if all match
-  setTimeout(function (cardA, cardB) {
-    cardA.remove('show');
-    cardA.replace('open', 'match');
-    cardB.remove('show');
-    cardB.replace('open', 'match');
-    // check if all cards match
-    let i;
-    for(i = 0; i < deck.children.length; i++) {
-      let last = deck.children[i].classList.length - 1;
-      if(deck.children[i].classList[last] != 'match') {
-        break;
-      }
+  openedCard.remove('show');
+  openedCard.replace('open', 'match');
+  e.target.classList.remove('show');
+  e.target.classList.replace('open', 'match');
+  // check if all cards match
+  let i;
+  for(i = 0; i < deck.children.length; i++) {
+    let last = deck.children[i].classList.length - 1;
+    if(deck.children[i].classList[last] != 'match') {
+      break;
     }
-    if(i == deck.children.length) { // You win!
-      setTimeout(function () {
-        console.log('Congratulation!');
-        finalStars.innerHTML = starHtml;
-        const finalTimer = document.querySelector('.finaltimer');
-        finalTimer.innerText = elapsedTime;
-        // Pop-up dialog
-        endDialog.showModal();
-      }, 0);
-      clearInterval(elapsedTimeId);
-    } else { // You do not win yet
-      console.log('Game continue!');
-    }
-    nOpen = 0;
-  }, 0, openedCard, e.target.classList);
+  }
+  if(i == deck.children.length) { // You win!
+    finalStars.innerHTML = starHtml;
+    const finalTimer = document.querySelector('.finaltimer');
+    finalTimer.innerText = elapsedTime;
+    clearInterval(elapsedTimeId);
+    // Pop-up dialog
+    endDialog.showModal();
+  }
+  nOpen = 0;
 }
 
 
 // Register call-back function
 document.querySelector('.deck').addEventListener('click', callBackDeck);
-document.querySelector('.restart').addEventListener('click', function(e) {
+document.querySelector('.restart').addEventListener('click', (e) => {
+  clearInterval(elapsedTimeId);
   init();
 });
-document.querySelector('.replay').addEventListener('click', function(e) {
-  init();
+document.querySelector('.replay').addEventListener('click', (e) => {
   endDialog.close();
+  init();
 });
-document.querySelector('.quit').addEventListener('click', function(e) {
+document.querySelector('.quit').addEventListener('click', (e) => {
   endDialog.close();
 });
 

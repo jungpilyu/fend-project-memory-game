@@ -16,6 +16,10 @@ This project was done as a partial fulfillment of the requirements for "Front-En
 - When the player wins the game, a congratulations modal shoud open showing the moves, star rating, and the time elapsed.
 - A replay button should shuffle the board, reset the timer, and initialize the star rating.
 
+# External Library Dependency
+All icons including card, restart, and star symbols are from [Font Awesome](https://fontawesome.com/), the web's most popular icon set and toolkit. In order to use Font Awesome's free CDN, the following code snippet is inserted in the head element of *index.html*. See [the detail](https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=web-fonts-with-css).
+```<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">```
+
 # Rubric Points
 
 The [rubric points](https://review.udacity.com/#!/rubrics/591/view) are checked by providing the description in each step.
