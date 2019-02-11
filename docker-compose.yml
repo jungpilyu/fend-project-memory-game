@@ -1,0 +1,12 @@
+# specify docker-compose version
+version: '3'
+services:
+  webGameServer:
+    image: jungpilyu/memorygame:latest
+    ports:
+      - "80:80"
+    environment:
+      HTTP_PORT: "80"
+    container_name: mygame
+    labels:
+      description: "card-matching game"
